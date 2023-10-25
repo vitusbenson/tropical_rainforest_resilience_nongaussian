@@ -1,6 +1,6 @@
 # Code for Benson et. al., ArXiv (2023) - Measuring tropical rainforest resilience under non-Gaussian disturbances
 
-
+Preprint: https://arxiv.org/abs/2310.16021
 
 ## Instructions
 
