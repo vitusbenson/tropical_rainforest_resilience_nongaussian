@@ -56,5 +56,27 @@ ts = pd.read_csv("../data/amaz_ts_20221202/ts_t_climatechange=500-alpha=1.75-sig
 
 ews = pd.read_csv("../data/amaz_ews_20221202/seed=0/ews_t_climatechange=500-alpha=1.75-sigma=0.1-only_negative_disturbances=True-add_short_timescale=True-seed=0.csv", index_col = 0)
 
-
 ts[["Ps", "Ts_det", "Tfixs", "Ts_0"]].join(ews).to_csv("../data/share/ts_example.csv")
+
+# %%
+
+ts = pd.read_csv("../data/amaz_ts_20221202/ts_t_climatechange=500-alpha=2.0-sigma=0.2-only_negative_disturbances=True-add_short_timescale=True.csv", index_col = 0)
+
+ews = pd.read_csv("../data/amaz_ews_20221202/seed=1/ews_t_climatechange=500-alpha=2.0-sigma=0.2-only_negative_disturbances=True-add_short_timescale=True-seed=1.csv", index_col = 0)
+
+ts[["Ps", "Ts_det", "Tfixs", "Ts_1"]].join(ews).to_csv("../data/share/ts_example_gauss.csv")
+# %%
+
+ts = pd.read_csv("../data/amaz_ts_20221202/ts_t_climatechange=500-alpha=1.0-sigma=0.01-only_negative_disturbances=True-add_short_timescale=True.csv", index_col = 0)
+
+ews = pd.read_csv("../data/amaz_ews_20221202/seed=16/ews_t_climatechange=500-alpha=1.0-sigma=0.01-only_negative_disturbances=True-add_short_timescale=True-seed=16.csv", index_col = 0)
+
+ts[["Ps", "Ts_det", "Tfixs", "Ts_16"]].join(ews).to_csv("../data/share/ts_example_cauchy.csv")
+# %%
+
+ts = pd.read_csv("../data/amazpink_ts_20230712/ts_t_climatechange=500-alpha=2.0-sigma=0.02-only_negative_disturbances=False-add_short_timescale=True.csv", index_col = 0)
+
+ews = pd.read_csv("../data/amazpink_ews_20230712/seed=0/ews_t_climatechange=500-alpha=2.0-sigma=0.02-only_negative_disturbances=False-add_short_timescale=True-seed=0.csv", index_col = 0)
+
+ts[["Ps", "Ts_det", "Tfixs", "Ts_0"]].join(ews).to_csv("../data/share/ts_example_pink.csv")
+# %%
