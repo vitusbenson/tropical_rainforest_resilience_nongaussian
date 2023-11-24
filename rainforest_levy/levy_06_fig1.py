@@ -113,6 +113,10 @@ plt.savefig("../plots/fig1b.png", dpi = 300, bbox_inches = "tight", transparent 
 
 # %%
 df = pd.read_csv("../data/share/ts_example.csv", index_col = 0)
+df_gauss = pd.read_csv("../data/share/ts_example_gauss.csv", index_col = 0)
+df_cauchy = pd.read_csv("../data/share/ts_example_cauchy.csv", index_col = 0)
+df_pink = pd.read_csv("../data/share/ts_example_pink.csv", index_col = 0)
+# %%
 fig, axs = plt.subplots(3,1, sharex=False, figsize = (6,6), dpi = 300, gridspec_kw={'height_ratios': [0.7,1, 0.7]})
 
 
@@ -130,26 +134,36 @@ axs[0].spines[["right", "top", "bottom"]].set_visible(False)
 
 axs[1].axvline(x=1000, ymin =0, ymax = 1.18, color = "tab:purple", lw = 2., clip_on=False)
 axs[1].axvline(x=1500, ymin = 0, ymax = 1.18, color = "tab:purple", lw = 2., clip_on=False)
-df.Ts_0.plot(ax = axs[1], color = "tab:red", lw = 1.5)
-df.Ts_det.plot(ax = axs[1], color = "tab:grey", lw = 1.5)
+
+df.Ts_0.plot(ax = axs[1], color = "tab:orange", lw = 1.)
+df_cauchy.Ts_16.plot(ax = axs[1], color = "tab:red", lw = 1.)
+df_pink.Ts_0.plot(ax = axs[1], color = "tab:pink", lw = 1.)
+df_gauss.Ts_1.plot(ax = axs[1], color = "tab:brown", lw = 1.)
+df.Ts_det.plot(ax = axs[1], color = "tab:gray", lw = 1., ls = "--")
 axs[1].axvline(x=df.ac1.dropna().index[-1], ymin = 0.0, ymax = 1.18, ls = "--", color = "black", lw = 1, clip_on=False)
-axs[1].set_ylim(30,90)
-axs[1].set_yticks([30, 50, 70, 90])
+axs[1].set_ylim(30,85)
+axs[1].set_yticks([30, 50, 70, 85])
 axs[1].set_xlim(0, 2000)
 axs[1].xaxis.set_ticks([])
 axs[1].set_ylabel(r'Tree Cover $T [\%]$')
-custom_lines = [Line2D([0], [0], color="tab:red", lw=2),
-                Line2D([0], [0], color="tab:grey", lw=2),
+custom_lines = [ Line2D([0], [0], color="tab:brown", lw=2),
+                Line2D([0], [0], color="tab:orange", lw=2),
+                Line2D([0], [0], color="tab:red", lw=2),
+                Line2D([0], [0], color="tab:pink", lw=2),
+                Line2D([0], [0], color="tab:grey", lw=2, ls = "--"),
                 ]
-axs[1].legend(custom_lines, ['Stochastic','Deterministic'], loc = 'lower left')
+axs[1].legend(custom_lines, [r'Gauss $\alpha = 2.0$',r'Lévy $\alpha = 1.75$', r'Cauchy $\alpha = 1.0$', 'Pink', 'Deterministic'], loc = 'lower left')
 
 axs[1].spines[["left", "bottom"]].set_position(('outward', 10))
 axs[1].spines[["right", "top", "bottom"]].set_visible(False)
 
-axs[2].axvline(x=1000, ymin = -0.087, ymax = 1.18, color = "tab:purple", lw = 2., clip_on=False)
-axs[2].axvline(x=1500, ymin = -0.087, ymax = 1.18, color = "tab:purple", lw = 2., clip_on=False)
-df.ac1.dropna().plot(ax = axs[2], color = "tab:orange", lw = 1.5)
-axs[2].axvline(x=df.ac1.dropna().index[-1], ymin = -0.087, ymax = 1.18, ls = "--", color = "black", lw = 1, clip_on=False)
+axs[2].axvline(x=1000, ymin = -0.087, ymax = 1.24, color = "tab:purple", lw = 2., clip_on=False)
+axs[2].axvline(x=1500, ymin = -0.087, ymax = 1.24, color = "tab:purple", lw = 2., clip_on=False)
+df.ac1.dropna().plot(ax = axs[2], color = "tab:orange", lw = 0.75)
+df_cauchy.ac1.dropna().plot(ax = axs[2], color = "tab:red", lw = 0.75)
+df_pink.ac1.dropna().plot(ax = axs[2], color = "tab:pink", lw = 0.75)
+df_gauss.ac1.dropna().plot(ax = axs[2], color = "tab:brown", lw = 0.75)
+axs[2].axvline(x=df.ac1.dropna().index[-1], ymin = -0.087, ymax = 1.24, ls = "--", color = "black", lw = 1, clip_on=False)
 
 #axs[2].axvline(x=df.index[(df.Ts_0 <= 56.69).argmax()], ymin = -0.087, ymax = 1.18, ls = "--", color = "black", lw = 0.5, clip_on=False)
 axs[2].set_ylim(-0.2, 1.0)

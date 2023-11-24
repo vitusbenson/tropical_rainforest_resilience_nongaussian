@@ -2,18 +2,22 @@
 import pandas as pd
 
 # %%
-recall = pd.read_csv("../data/recall.csv", index_col=0)
-fpr = pd.read_csv("../data/falseposrate.csv", index_col=0)
+recall = pd.read_csv("../data/share/recall.csv", index_col=0)
+fpr = pd.read_csv("../data/share/falseposrate.csv", index_col=0)
 # %%
 
 configs = [
-    ["vannes", "std_dev", "p_linear"],
+    ["vannes", "iqr", "p_linear"],
+    ["vannes", "iqr", 'p_theilsen'],
     ["vannes", "iqr", "p_kendalltau"],
     ["ours", "iqr", "p_linear"],
     ["ours", "iqr", "p_theilsen"],
     ["ours", "iqr", "p_kendalltau"],
+    ["vannes", "std_dev", "p_kendalltau"],
+    ["vannes", "ac1", "p_kendalltau"],
     ["ours", "std_dev", "p_kendalltau"],
     ["ours", "ac1", "p_kendalltau"],
+    ["vannes", "iqr", "p_kendalltau_adj"],
     ["ours", "iqr", "p_kendalltau_adj"],
 ]
 
@@ -36,7 +40,7 @@ for potential, ews, slope in configs:
 
 # %%
 df = pd.DataFrame.from_records(results)
-print(df.T.to_latex())
+print(df.to_latex())
 # %%
 recall[(recall.valid > 0.5) & (recall.only_negative_disturbances)].melt(id_vars = ["alpha", "sigma", "add_short_timescale", "ews"], value_vars = ["p_linear", "p_kendalltau" ,"p_theilsen","p_kendalltau_adj"], var_name ="slopetype", value_name = "slope").groupby(["add_short_timescale", "ews", "slopetype"]).mean().sort_values("slope")
 
