@@ -197,7 +197,7 @@ plt.colorbar(lc, ax = axs[1], label = r'Precipitation $P [\frac{mm}{day}]$')
 custom_lines = [Line2D([0], [0], color="black", lw = lw_my, alpha = alpha_my,ls=  ls_my,),
                 Line2D([0], [0], color="black", alpha = alpha_vn, lw = lw_vn, ls=ls_vn),
                 ]
-plt.figlegend(custom_lines, ['Present Work','Potential in van Nes et al. [37]'], loc = 'lower center', ncols = 2,bbox_to_anchor=(0.5, -0.1))
+plt.figlegend(custom_lines, ['Present Work','Potential in van Nes et al. [45]'], loc = 'lower center', ncols = 2,bbox_to_anchor=(0.5, -0.1))
 fig.tight_layout()
 plt.savefig("../plots/fig2.pdf", dpi = 300, bbox_inches = "tight", transparent = True)
 ## %%
